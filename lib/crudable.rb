@@ -1,0 +1,3 @@
+module Crudable
+  # Your code goes here...
+end
