@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Crudable::VERSION
   s.authors     = ['alex-lairan']
   s.email       = ['lairana@free.fr']
-  s.homepage    = 'TODO'
+  s.homepage    = 'https://github.com/alex-lairan/crudable'
   s.summary     = 'Crudable simplify your CRUD controller.'
   s.description = 'Crudable simplify your CRUD controller.'
   s.license     = 'MIT'
