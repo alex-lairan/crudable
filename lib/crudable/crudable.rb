@@ -29,7 +29,7 @@ module Crudable
     def create
       set_resource(resource_klass.new(resource_params))
       if get_resource.save
-        render json: get_resource, status: :created, location: get_resource
+        render json: get_resource, status: :created
       else
         render json: get_resource.errors, status: :unprocessable_entity
       end
