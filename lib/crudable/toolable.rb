@@ -52,7 +52,7 @@ module Toolable
     # The plural name for the resource class based on the controller
     # @return [String]
     def plural_resource_name
-      @plural_resource_name ||= "@#{resource_name.pluralize}"
+      @plural_resource_name ||= resource_name.pluralize
     end
 
     # Only allow a trusted parameter "white list" through.
