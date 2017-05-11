@@ -14,7 +14,7 @@ module Searchable
       set_plural_resource(get_plural_resource.page(page_params[:page])
                                              .per(page_params[:per_page]))
 
-      render json: get_plural_resource.to_json
+      render json: get_plural_resource
     end
 
     private
