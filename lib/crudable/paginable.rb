@@ -1,5 +1,6 @@
 module Paginable
   extend ActiveSupport::Concern
+  include Toolable
 
   included do
     after_action :pagination_headers, only: %i(index)
@@ -14,7 +15,7 @@ module Paginable
     private
 
     def pagination_resource
-      raise 'Set a pagination_resource method !'
+      instance_variable_get(plural_resource_name)
     end
   end
 end

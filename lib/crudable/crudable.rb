@@ -5,20 +5,20 @@ module Crudable
   include Sortable
   include Toolable
   include Paginable
+  include Searchable
 
   included do
     before_action :set_resource, only: %i(destroy show update)
 
     # GET /api/v2/{plural_resource_name}
     def index
-      plural_resource_name = "@#{resource_name.pluralize}"
       resources = resource_klass.where(query_params)
                                 .order(query_sort)
                                 .page(page_params[:page])
                                 .per(page_params[:per_page])
 
-      instance_variable_set(plural_resource_name, resources)
-      render json: instance_variable_get(plural_resource_name)
+      set_plural_resource(resources)
+      render json: get_plural_resource
     end
 
     # GET /api/v2/{plural_resource_name}/1
@@ -48,13 +48,6 @@ module Crudable
     def destroy
       get_resource.destroy
       head :no_content
-    end
-
-    private
-
-    def pagination_resource
-      plural_resource_name = "@#{resource_name.pluralize}"
-      instance_variable_get(plural_resource_name)
     end
   end
 end
