@@ -1,9 +1,12 @@
 module Searchable
   extend ActiveSupport::Concern
+  include Paginable
   include Toolable
   include Sortable
 
   included do
+    after_action :pagination_headers, only: %i(index search)
+
     def search
       set_plural_resource(resource_searched(filtering_params.first))
       filtering_params.map do |column|
