@@ -12,7 +12,8 @@ module Crudable
 
     # GET /api/v2/{plural_resource_name}
     def index
-      resources = resource_klass.where(query_params)
+      resources = resource_klass.where(sort_params_yes)
+                                .where.not(sort_params_not)
                                 .order(query_sort)
                                 .page(page_params[:page])
                                 .per(page_params[:per_page])
@@ -49,6 +50,17 @@ module Crudable
       get_resource.destroy
       head :no_content
     end
+  end
+
+  private
+
+  def sort_params_yes
+    query_params.select { |_k, v| v[0] != '!' }
+  end
+
+  def sort_params_not
+    query_params.select { |_k, v| v[0] == '!' }
+                .transform_values { |v| v[1..-1] }
   end
 end
 # rubocop: enable Metrics/BlockLength
