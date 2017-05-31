@@ -43,6 +43,12 @@ module Toolable
       @resource_klass ||= resource_name.classify.constantize
     end
 
+    # The resource scopped logic
+    # @return [ActiveRecord::Relation]
+    def resource_scopped
+      resource_klass.all
+    end
+
     # The singular name for the resource class based on the controller
     # @return [String]
     def resource_name
@@ -65,12 +71,12 @@ module Toolable
     end
 
     def set_resource(resource = nil)
-      resource ||= resource_klass.find(params[:id])
+      resource ||= resource_scopped.find(params[:id])
       instance_variable_set("@#{resource_name}", resource)
     end
 
     def set_plural_resource(resources = nil)
-      resources ||= resource_klass.all
+      resources ||= resource_scopped
       instance_variable_set("@#{plural_resource_name}", resources)
     end
   end
