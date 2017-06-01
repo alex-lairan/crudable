@@ -12,11 +12,11 @@ module Crudable
 
     # GET /api/v2/{plural_resource_name}
     def index
-      resources = resource_klass.where(sort_params_yes)
-                                .where.not(sort_params_not)
-                                .order(query_sort)
-                                .page(page_params[:page])
-                                .per(page_params[:per_page])
+      resources = resource_scopped.where(sort_params_yes)
+                                  .where.not(sort_params_not)
+                                  .order(query_sort)
+                                  .page(page_params[:page])
+                                  .per(page_params[:per_page])
 
       set_plural_resource(resources)
       render json: get_plural_resource
