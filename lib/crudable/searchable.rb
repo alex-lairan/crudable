@@ -8,6 +8,8 @@ module Searchable
     after_action :pagination_headers, only: %i(index search)
 
     def search
+      render json: [] if filtering_params.empty?
+
       set_plural_resource(resource_searched(filtering_params.first))
       filtering_params.map do |column|
         set_plural_resource(get_plural_resource.or(resource_searched(column)))
