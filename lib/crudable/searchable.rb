@@ -27,7 +27,7 @@ module Searchable
     end
 
     def resource_searched(column)
-      resource_klass.where(match(column))
+      resource_scopped.where(match(column))
     end
 
     def table
