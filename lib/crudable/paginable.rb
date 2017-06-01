@@ -7,10 +7,10 @@ module Paginable
 
     def pagination_headers
       element = pagination_resource
-      headers['X-Total-Count'] = element.total_count
-      headers['X-Total-Pages'] = element.total_pages
-      headers['X-Current-Page'] = element.current_page
-      headers['X-Count-Per-Page'] = element.limit_value
+      headers['X-Total-Count']    = element&.total_count
+      headers['X-Total-Pages']    = element&.total_pages
+      headers['X-Current-Page']   = element&.current_page
+      headers['X-Count-Per-Page'] = element&.limit_value
     end
 
     private
